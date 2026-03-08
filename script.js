@@ -14,14 +14,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Scroll to products section on "Buy Now"
+    // Redirect to products page on "Buy Now"
     const buyBtn = document.querySelector(".buy-btn");
     if (buyBtn) {
         buyBtn.addEventListener("click", function () {
-            const productsSection = document.getElementById("products");
-            if (productsSection) {
-                productsSection.scrollIntoView({ behavior: "smooth" });
-            }
+            window.location.href = "products.html";
         });
     }
 
