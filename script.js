@@ -73,23 +73,29 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // View More button functionality
-    document.querySelector(".view-more-btn").addEventListener("click", function () {
-        window.location.href = "all-products.html";
-    });
+    const viewMoreBtn = document.querySelector(".view-more-btn");
+    if (viewMoreBtn) {
+        viewMoreBtn.addEventListener("click", function () {
+            window.location.href = "all-products.html";
+        });
+    }
 
     // Subscription email using EmailJS
-    document.getElementById("subscribe-form").addEventListener("submit", function (event) {
-        event.preventDefault();
-        let email = document.getElementById("email").value;
+    const subscribeForm = document.getElementById("subscribe-form");
+    if (subscribeForm) {
+        subscribeForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            let email = document.getElementById("email").value;
 
-        emailjs.send("service_xxx", "template_xxx", {
-            to_email: email,
-            subject: "🎉 Welcome to Mandi Trendz – Your Style Journey Begins!",
-            message: `Dear Customer, \n\nWelcome to Mandi Trendz! 🎀✨ We're thrilled to have you join our community of fashion lovers.\n\n✅ Exclusive first access to new arrivals\n✅ Special discounts & promotions 💰\n✅ Styling tips and fashion inspiration\n\n👜 Shop Now → [Insert Website Link]\n\nWhere Class Meets Convenience!\nMandi Trendz Team\n📩 emmahmumoh@gmail.com | 📞 +254 742439040 | 🌍 [Website]`,
-        }).then(() => {
-            alert("Thank you for subscribing! Check your email.");
+            emailjs.send("service_xxx", "template_xxx", {
+                to_email: email,
+                subject: "🎉 Welcome to Mandi Trendz – Your Style Journey Begins!",
+                message: `Dear Customer, \n\nWelcome to Mandi Trendz! 🎀✨ We're thrilled to have you join our community of fashion lovers.\n\n✅ Exclusive first access to new arrivals\n✅ Special discounts & promotions 💰\n✅ Styling tips and fashion inspiration\n\n👜 Shop Now → [Insert Website Link]\n\nWhere Class Meets Convenience!\nMandi Trendz Team\n📩 emmahmumoh@gmail.com | 📞 +254 742439040 | 🌍 [Website]`,
+            }).then(() => {
+                alert("Thank you for subscribing! Check your email.");
+            });
         });
-    });
+    }
 
     // Back to top button functionality
     let backToTopBtn = document.getElementById("backToTop");
@@ -124,11 +130,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 mobileMenu.classList.remove('active');
             });
         });
-        // Dynamic Product Loading from Supabase
-        async function fetchProducts() {
-            const grid = document.getElementById('products-grid');
-            if (!grid) return;
+    }
 
+    // Dynamic Product Loading from Supabase
+    async function fetchProducts() {
+        console.log("Fetching products from Supabase...");
+        const grid = document.getElementById('products-grid');
+        if (!grid) {
+            console.log("Products grid container not found");
+            return;
+        }
+
+        try {
             const { data: products, error } = await supabaseClient
                 .from('products')
                 .select('*')
@@ -136,13 +149,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 .order('created_at', { ascending: false });
 
             if (error) {
-                console.error("Supabase error:", error);
+                console.error("Supabase fetch error:", error);
                 grid.innerHTML = '<p style="color: red;">Error loading products. Please try again later.</p>';
                 return;
             }
 
-            if (products.length === 0) {
-                grid.innerHTML = '<p style="color: #888;">Check back soon for new arrivals!</p>';
+            console.log("Products fetched:", products);
+
+            if (!products || products.length === 0) {
+                grid.innerHTML = '<p style="color: #888; text-align: center; width: 100%;">Check back soon for new arrivals!</p>';
                 return;
             }
 
@@ -163,6 +178,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
             `;
             });
+        } catch (err) {
+            console.error("Unexpected fetch error:", err);
         }
     }
 
