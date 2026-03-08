@@ -233,13 +233,25 @@
 </head>
 
 <body>
-    <nav class="admin-nav">
-        <div class="logo">
-            <img src="Images/Logo.jpg" alt="Logo" style="width: 40px; border-radius: 50%;">
-            <span style="color: #D4AF37; font-weight: bold; margin-left: 10px;">Mandi Trendz Admin</span>
-        </div>
-        <button onclick="logout()" class="logout-btn">Log Out</button>
-    </nav>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="Images/Logo.jpg" alt="Mandi Trendz Logo" class="nav-logo">
+                Mandi Trendz <span style="font-size: 12px; color: #888; margin-left: 10px;">(Admin)</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">View Site</a></li>
+                <li><a href="admin.html" class="active">Inventory</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button onclick="logout()" class="logout-btn">Log Out</button>
+                <div class="menu-toggle" id="mobile-menu">
+                    <i class='bx bx-menu'></i>
+                </div>
+            </div>
+        </nav>
+    </header>
 
     <div class="content-container">
         <div class="stats-grid">
