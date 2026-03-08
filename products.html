@@ -5,7 +5,6 @@
 <!-- Font Awesome CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <link rel="stylesheet" href="style.css">
-<script defer src="script.js"></script>
 </head>
 
 <body>
@@ -72,124 +71,9 @@
         <div class="products-title">
             <h3>POPULAR <span class="gold-text">ITEMS</span></h3>
         </div>
-        <div class="products-container">
-            <!-- Product 1 -->
-            <div class="product-card">
-                <img src="Images/bag 1.jpg" alt="Bag 1">
-            </div>
-
-            <div class="product-card">
-                <img src="Images/bag 2.jpg" alt="Bag 2">
-            </div>
-
-
-            <div class="product-card">
-                <img src="Images/bag 3.jpg" alt="Bag 3">
-            </div>
-
-
-            <div class="product-card">
-                <img src="Images/bag 4.jpg" alt="Bag 4">
-            </div>
-
-            <div class="product-card">
-                <img src="Images/bag 5.jpg" alt="Bag 5">
-            </div>
-
-            <div class="product-card">
-                <img src="Images/bag 6.jpg" alt="Bag 6">
-            </div>
-
-            <div class="product-card">
-                <img src="Images/bag 7.jpg" alt="Bag 7">
-            </div>
-
-            <div class="product-card">
-                <img src="Images/bag 8.jpg" alt="Bag 8">
-            </div>
-
-            <div class="product-card">
-                <img src="Images/bag 9.jpg" alt="Bag 9">
-            </div>
-
-
-            <div class="product-card">
-                <img src="Images/bag 18.jpg" alt="Bag 18">
-            </div>
-
-            <div class="product-card">
-                <img src="Images/bag 22.jpg" alt="Bag 22">
-            </div>
-
-            <div class="product-card">
-                <img src="Images/bag 25.jpg" alt="Bag 25">
-            </div>
-
-
-            <div class="product-card">
-                <img src="Images/bag 31.jpg" alt="Bag 31">
-            </div>
-
-
-            <div class="product-card">
-                <img src="Images/bag 33.jpg" alt="Bag 33">
-            </div>
-
-            <div class="product-card">
-                <img src="Images/bag 35.jpg" alt="Bag 35">
-            </div>
-
-            <div class="product-card">
-                <img src="Images/bag 37.jpg" alt="Bag 37">
-            </div>
-
-            <div class="product-card">
-                <img src="Images/bag 38.jpg" alt="Bag 38">
-            </div>
-
-            <div class="product-card">
-                <img src="Images/bag 39.jpg" alt="Bag 39">
-            </div>
-
-            <div class="product-card">
-                <img src="Images/bag 45.jpg" alt="Bag 45">
-            </div>
-
-
-            <div class="product-card">
-                <img src="Images/bag 56.jpg" alt="Bag 56">
-            </div>
-
-            <div class="product-card">
-                <img src="Images/bag 62.jpg" alt="Bag 62">
-            </div>
-
-            <div class="product-card">
-                <img src="Images/bag 67.jpg" alt="Bag 67">
-            </div>
-
-
-            <div class="product-card">
-                <img src="Images/bag 69.jpg" alt="Bag 69">
-            </div>
-
-
-            <div class="product-card">
-                <img src="Images/bag 73.jpg" alt="Bag 73">
-            </div>
-
-            <div class="product-card">
-                <img src="Images/bag 74.jpg" alt="Bag 74">
-            </div>
-
-            <div class="product-card">
-                <img src="Images/bag 75.jpg" alt="Bag 75">
-            </div>
-
-            <div class="product-card">
-                <img src="Images/bag 76.jpg" alt="Bag 76">
-            </div>
-
+        <div class="products-container" id="products-grid">
+            <!-- Products will load dynamically from Supabase -->
+            <p style="color: #888; text-align: center; width: 100%;">Loading latest collection...</p>
         </div>
 
         <h2>OUR POPULAR PRODUCTS ARE IN DIFFERENT COLORS AND ARE
@@ -273,6 +157,10 @@
 
         <button id="backToTop" title="Go to top">↑</button>
 
+    <!-- Supabase SDK and Config -->
+    <script src=" https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2\></script>
+ <script src=\config.js\></script>
+ <script src=\script.js\></script>
 </body>
 
 </html>
