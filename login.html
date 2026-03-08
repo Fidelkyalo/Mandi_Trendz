@@ -126,7 +126,11 @@
 
             try {
                 console.log("Attempting sign in for:", email);
-                const { data, error } = await supabase.auth.signInWithPassword({
+                if (typeof supabaseClient === 'undefined') {
+                    throw new Error("Supabase client not initialized. Check config.js.");
+                }
+
+                const { data, error } = await supabaseClient.auth.signInWithPassword({
                     email: email,
                     password: password,
                 });
@@ -138,14 +142,16 @@
                         errorMsg.textContent = "Please confirm your email in Supabase settings or your inbox.";
                     }
                     errorMsg.style.display = 'block';
+                    alert("Error: " + error.message);
                 } else {
                     console.log("Login successful!");
                     window.location.href = 'admin.html';
                 }
             } catch (err) {
                 console.error("Unexpected error:", err);
-                errorMsg.textContent = "An unexpected error occurred. Check browser console.";
+                errorMsg.textContent = "An unexpected error occurred: " + err.message;
                 errorMsg.style.display = 'block';
+                alert("Unexpected Error: " + err.message);
             } finally {
                 submitBtn.textContent = 'Log In';
                 submitBtn.disabled = false;
@@ -153,12 +159,14 @@
         });
 
         // Check session
-        supabase.auth.getSession().then(({ data: { session } }) => {
-            if (session) {
-                console.log("Active session found, redirecting...");
-                window.location.href = 'admin.html';
-            }
-        });
+        if (typeof supabaseClient !== 'undefined') {
+            supabaseClient.auth.getSession().then(({ data: { session } }) => {
+                if (session) {
+                    console.log("Active session found, redirecting...");
+                    window.location.href = 'admin.html';
+                }
+            });
+        }
     </script>
 </body>
 
