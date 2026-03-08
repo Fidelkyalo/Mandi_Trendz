@@ -546,23 +546,30 @@ nav {
 .contact-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.contact-container.vertical-stack {
+    flex-direction: column;
 }
 
 .map-container {
-    flex: 1 1 45%;
-    min-height: 300px;
-    border-radius: 10px;
+    flex: 1 1 100%;
+    min-height: 450px;
+    border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid #D4AF37;
 }
 
 .form-container {
-    flex: 1 1 45%;
+    flex: 1 1 100%;
     background-color: #1a1a1a;
-    padding: 30px;
-    border-radius: 10px;
+    padding: 40px;
+    border-radius: 15px;
     color: #fff;
+    border-left: 5px solid #D4AF37;
 }
 
 .contact-details {
