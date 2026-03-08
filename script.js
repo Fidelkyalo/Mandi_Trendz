@@ -1,38 +1,53 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Make the logo and name clickable
-    document.querySelector(".logo").addEventListener("click", function () {
-        window.location.href = "index.html";
-    });
+    const logo = document.querySelector(".logo");
+    if (logo) {
+        logo.addEventListener("click", function () {
+            window.location.href = "index.html";
+        });
+    }
 
-    document.querySelector(".brand-name").addEventListener("click", function () {
-        window.location.href = "index.html";
-    });
+    const brandName = document.querySelector(".brand-name");
+    if (brandName) {
+        brandName.addEventListener("click", function () {
+            window.location.href = "index.html";
+        });
+    }
 
     // Scroll to products section on "Buy Now"
-    document.querySelector(".buy-btn").addEventListener("click", function () {
-        document.getElementById("products").scrollIntoView({ behavior: "smooth" });
-    });
-
-    // Search functionality
-    document.querySelector(".search-btn").addEventListener("click", function () {
-        let query = document.querySelector(".search-input").value.toLowerCase();
-        let products = document.querySelectorAll(".product-item");
-        let found = false;
-
-        products.forEach(product => {
-            let name = product.querySelector(".product-name").textContent.toLowerCase();
-            if (name.includes(query)) {
-                product.style.display = "block";
-                found = true;
-            } else {
-                product.style.display = "none";
+    const buyBtn = document.querySelector(".buy-btn");
+    if (buyBtn) {
+        buyBtn.addEventListener("click", function () {
+            const productsSection = document.getElementById("products");
+            if (productsSection) {
+                productsSection.scrollIntoView({ behavior: "smooth" });
             }
         });
+    }
 
-        if (!found) {
-            alert("Sorry, try again");
-        }
-    });
+    // Search functionality
+    const searchBtn = document.querySelector(".search-btn");
+    if (searchBtn) {
+        searchBtn.addEventListener("click", function () {
+            let query = document.querySelector(".search-input").value.toLowerCase();
+            let products = document.querySelectorAll(".product-item");
+            let found = false;
+
+            products.forEach(product => {
+                let name = product.querySelector(".product-name").textContent.toLowerCase();
+                if (name.includes(query)) {
+                    product.style.display = "block";
+                    found = true;
+                } else {
+                    product.style.display = "none";
+                }
+            });
+
+            if (!found) {
+                alert("Sorry, try again");
+            }
+        });
+    }
 
     // Add to cart functionality
     let cartCount = 0;
@@ -45,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
             let productPrice = this.closest(".product-item").querySelector(".product-price").textContent;
 
             cartCount++;
-            cartCounter.textContent = cartCount;
+            if (cartCounter) cartCounter.textContent = cartCount;
 
             cartDetails.push({ name: productName, price: parseFloat(productPrice.replace(/[^0-9]/g, '')) });
             alert("Item added to cart!");
@@ -53,24 +68,32 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Display cart items when clicked
-    document.getElementById("cart-icon").addEventListener("click", function () {
-        let cartPopup = document.getElementById("cart-popup");
-        let cartContent = "<h2>Cart Items</h2><ul>";
-        let total = 0;
+    const cartIcon = document.getElementById("cart-icon");
+    if (cartIcon) {
+        cartIcon.addEventListener("click", function () {
+            let cartPopup = document.getElementById("cart-popup");
+            if (!cartPopup) return;
 
-        cartDetails.forEach(item => {
-            cartContent += `<li>${item.name} - KES ${item.price}</li>`;
-            total += item.price;
+            let cartContent = "<h2>Cart Items</h2><ul>";
+            let total = 0;
+
+            cartDetails.forEach(item => {
+                cartContent += `<li>${item.name} - KES ${item.price}</li>`;
+                total += item.price;
+            });
+
+            cartContent += `</ul><h3>Total: KES ${total}</h3><button id='place-order'>Place Order</button>`;
+            cartPopup.innerHTML = cartContent;
+            cartPopup.style.display = "block";
+
+            const placeOrderBtn = document.getElementById("place-order");
+            if (placeOrderBtn) {
+                placeOrderBtn.addEventListener("click", function () {
+                    window.location.href = "tel:*334*2*0742439040#";
+                });
+            }
         });
-
-        cartContent += `</ul><h3>Total: KES ${total}</h3><button id='place-order'>Place Order</button>`;
-        cartPopup.innerHTML = cartContent;
-        cartPopup.style.display = "block";
-
-        document.getElementById("place-order").addEventListener("click", function () {
-            window.location.href = "tel:*334*2*0742439040#";
-        });
-    });
+    }
 
     // View More button functionality
     const viewMoreBtn = document.querySelector(".view-more-btn");
