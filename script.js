@@ -153,20 +153,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Dynamic Product Loading from Supabase
-    async function fetchProducts() {
+    async function fetchProducts(selectedCategory = 'All Bags') {
         const grid = document.getElementById('products-grid');
         if (!grid) {
             return; // Not on a page with products grid
         }
 
-        console.log("Fetching products from Supabase...");
+        console.log(`Fetching products for category: ${selectedCategory}...`);
+        grid.innerHTML = '<p style="color: #888; text-align: center; width: 100%;">Loading latest collection...</p>';
 
         try {
-            const { data: products, error } = await supabaseClient
+            let query = supabaseClient
                 .from('products')
                 .select('*')
                 .eq('in_stock', true)
                 .order('created_at', { ascending: false });
+
+            // Apply category filter if not "All Bags"
+            if (selectedCategory && selectedCategory !== 'All Bags') {
+                query = query.eq('category', selectedCategory);
+            }
+
+            const { data: products, error } = await query;
 
             if (error) {
                 console.error("Supabase fetch error:", error);
@@ -177,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("Products fetched:", products);
 
             if (!products || products.length === 0) {
-                grid.innerHTML = '<p style="color: #888; text-align: center; width: 100%;">Check back soon for new arrivals!</p>';
+                grid.innerHTML = '<p style="color: #888; text-align: center; width: 100%;">Check back soon for new arrivals in this category!</p>';
                 return;
             }
 
@@ -200,10 +208,30 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         } catch (err) {
             console.error("Unexpected fetch error:", err);
+            grid.innerHTML = '<p style="color: red;">Unexpected error. Please try again later.</p>';
         }
     }
 
+    // Initialize products fetch on load
     fetchProducts();
+
+    // Setup Category Click Listeners
+    const categoryItems = document.querySelectorAll('.category-item');
+    if (categoryItems.length > 0) {
+        categoryItems.forEach(item => {
+            item.addEventListener('click', function () {
+                // Remove active class from all
+                categoryItems.forEach(c => c.classList.remove('active'));
+
+                // Add active class to clicked item
+                this.classList.add('active');
+
+                // Fetch products for this category
+                const categoryName = this.textContent.trim();
+                fetchProducts(categoryName);
+            });
+        });
+    }
 });
 
 // Global addToCart function for dynamic elements
