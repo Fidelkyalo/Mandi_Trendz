@@ -966,3 +966,288 @@ footer {
 #backToTop:active {
     transform: scale(0.95);
 }
+
+/* ================================================
+   COMPREHENSIVE MOBILE RESPONSIVE STYLES
+   ================================================ */
+
+/* ---- Tablet & Small Desktop (max 992px) ---- */
+@media screen and (max-width: 992px) {
+
+    /* Hero */
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 6%;
+        gap: 30px;
+    }
+
+    .hero-text {
+        max-width: 100%;
+    }
+
+    .hero-text h1 {
+        font-size: 38px;
+    }
+
+    .hero-image img {
+        width: 300px;
+    }
+
+    /* Products section */
+    .products-section {
+        padding: 60px 5%;
+    }
+
+    .products-container {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+    }
+
+    /* About section */
+    .about-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .about-story h3 {
+        font-size: 22px;
+    }
+
+    /* Contact */
+    .map-container-full {
+        padding: 0 3%;
+    }
+
+    /* Footer */
+    .footer-container {
+        gap: 25px;
+        padding: 0 20px 40px 20px;
+    }
+}
+
+/* ---- Mobile (max 768px) ---- */
+@media screen and (max-width: 768px) {
+
+    body {
+        padding-top: 70px;
+    }
+
+    /* ── Navbar ── */
+    header {
+        padding: 10px 16px;
+    }
+
+    .logo {
+        font-size: 17px;
+        gap: 8px;
+    }
+
+    .nav-logo {
+        width: 32px;
+        height: 32px;
+    }
+
+    /* ── Hero Section ── */
+    .hero {
+        flex-direction: column;
+        padding: 30px 5%;
+        text-align: center;
+        justify-content: center;
+        min-height: auto;
+    }
+
+    .hero-text {
+        max-width: 100%;
+    }
+
+    .hero-text h1 {
+        font-size: 30px;
+        line-height: 1.3;
+    }
+
+    .hero-text h2 {
+        font-size: 14px;
+    }
+
+    .buy-btn {
+        font-size: 15px;
+        padding: 10px 20px;
+    }
+
+    /* Hide the rotating image on small screens */
+    .hero-image {
+        display: none;
+    }
+
+    /* ── Products Page ── */
+    .products-section {
+        padding: 40px 4%;
+    }
+
+    .products-header h2 {
+        font-size: 24px;
+    }
+
+    .products-container {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 16px;
+    }
+
+    .product-card img {
+        height: 200px;
+    }
+
+    .product-card {
+        max-width: 100%;
+    }
+
+    .categories-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 12px;
+    }
+
+    .category-item {
+        padding: 14px 10px;
+        font-size: 13px;
+    }
+
+    /* ── About Section ── */
+    .about-section {
+        padding: 50px 5%;
+    }
+
+    .about-header h2 {
+        font-size: 26px;
+    }
+
+    .about-content {
+        flex-direction: column;
+        gap: 25px;
+        margin-bottom: 40px;
+    }
+
+    .about-story h3 {
+        font-size: 20px;
+    }
+
+    .about-story p {
+        font-size: 15px;
+    }
+
+    /* ── Testimonials ── */
+    .testimonials {
+        padding: 60px 5%;
+    }
+
+    .testimonials h2 {
+        font-size: 22px;
+        margin-bottom: 30px;
+    }
+
+    .testimonials-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .testimonial-card {
+        padding: 30px 20px;
+    }
+
+    /* ── Contact Section ── */
+    .contact-section {
+        padding: 50px 0 0 0;
+    }
+
+    .contact-container {
+        padding: 0 5% 40px 5%;
+    }
+
+    .form-container {
+        padding: 40px 20px;
+    }
+
+    .map-card {
+        height: 300px;
+    }
+
+    /* ── Footer ── */
+    footer {
+        padding: 40px 0 0 0;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        gap: 30px;
+        padding: 0 20px 30px 20px;
+    }
+
+    .footer-section {
+        min-width: 100%;
+    }
+
+    .footer-section h3 {
+        font-size: 17px;
+        margin-bottom: 15px;
+    }
+
+    /* ── Cart Popup ── */
+    .cart-popup {
+        width: calc(100% - 20px);
+        right: 10px;
+        top: 70px;
+        padding: 18px 15px;
+    }
+
+    /* ── Back to Top Button ── */
+    #backToTop {
+        width: 42px;
+        height: 42px;
+        font-size: 20px;
+        bottom: 15px;
+        right: 15px;
+    }
+}
+
+/* ---- Small Mobile (max 480px) ---- */
+@media screen and (max-width: 480px) {
+
+    .hero-text h1 {
+        font-size: 26px;
+    }
+
+    .hero-text h2 {
+        font-size: 13px;
+    }
+
+    .products-container {
+        grid-template-columns: 1fr;
+    }
+
+    .product-card img {
+        height: 220px;
+    }
+
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cart-popup {
+        width: 100%;
+        right: 0;
+        border-radius: 0 0 12px 12px;
+    }
+
+    .form-container {
+        border-radius: 12px;
+    }
+
+    .about-header h2 {
+        font-size: 22px;
+    }
+
+    .testimonials h2 {
+        font-size: 20px;
+        letter-spacing: 1px;
+    }
+}
