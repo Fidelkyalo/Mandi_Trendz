@@ -113,8 +113,10 @@ nav {
     font-size: 18px;
     text-decoration: none;
     transition: transform 0.3s ease, background 0.3s ease;
-    background: #eee;
-    color: #555;
+    background: #111;
+    /* Dark background for visibility */
+    color: #D4AF37;
+    /* Gold color */
 }
 
 .social-icons a:hover {
