@@ -648,6 +648,15 @@ nav {
     transition: 0.3s;
 }
 
+/* Cart Popup Checkbox Styling */
+.cart-item-checkbox {
+    accent-color: #D4AF37;
+    /* Gold theme color for checkboxes */
+    width: 18px;
+    height: 18px;
+}
+
+
 .social-icons a:hover {
     color: #ffb84d;
 }

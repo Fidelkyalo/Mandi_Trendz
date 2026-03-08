@@ -68,35 +68,80 @@ document.addEventListener("DOMContentLoaded", function () {
             let cartPopup = document.getElementById("cart-popup");
             if (!cartPopup) return;
 
-            let cartContent = "<h2>Cart Items</h2><ul>";
+            let cartContent = "<h2>Cart Items</h2><ul style='list-style: none; padding: 0;'>";
             let total = 0;
 
             if (cartDetails.length === 0) {
                 cartContent += "<li>Your cart is empty</li>";
             } else {
-                cartDetails.forEach(item => {
-                    cartContent += `<li>${item.name} - KES ${item.price.toLocaleString()}</li>`;
+                cartDetails.forEach((item, index) => {
+                    cartContent += `
+                        <li style="margin-bottom: 10px; display: flex; align-items: center;">
+                            <input type="checkbox" id="cart-item-${index}" class="cart-item-checkbox" data-index="${index}" data-name="${item.name}" data-price="${item.price}" checked style="margin-right: 10px; cursor: pointer;">
+                            <label for="cart-item-${index}" style="cursor: pointer; flex-grow: 1;">${item.name} - KES ${item.price.toLocaleString()}</label>
+                        </li>`;
                     total += item.price;
                 });
             }
 
-            cartContent += `</ul><h3>Total: KES ${total.toLocaleString()}</h3><button id='place-order'>Place Order on WhatsApp</button>`;
+            cartContent += `</ul><h3 id='cart-total'>Total: KES ${total.toLocaleString()}</h3>`;
+
+            if (cartDetails.length > 0) {
+                cartContent += `<button id='place-order' style='width: 100%; margin-top: 10px; padding: 10px; background: #25D366; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;'>Place Order on WhatsApp</button>`;
+            }
 
             // Add a close button
-            cartContent += `<button id='close-cart' style='margin-top: 10px; background: #333;'>Close Cart</button>`;
+            cartContent += `<button id='close-cart' style='width: 100%; margin-top: 10px; padding: 10px; background: #333; color: white; border: none; border-radius: 5px; cursor: pointer;'>Close Cart</button>`;
 
             cartPopup.innerHTML = cartContent;
             cartPopup.style.display = "block";
 
+            // Add event listeners to checkboxes to update total dynamically
+            const checkboxes = cartPopup.querySelectorAll('.cart-item-checkbox');
+            const totalDisplay = document.getElementById('cart-total');
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function () {
+                    let newTotal = 0;
+                    checkboxes.forEach(cb => {
+                        if (cb.checked) {
+                            newTotal += parseFloat(cb.getAttribute('data-price'));
+                        }
+                    });
+                    if (totalDisplay) {
+                        totalDisplay.innerText = `Total: KES ${newTotal.toLocaleString()}`;
+                    }
+                });
+            });
+
             const placeOrderBtn = document.getElementById("place-order");
             if (placeOrderBtn) {
                 placeOrderBtn.addEventListener("click", function () {
+                    // Gather selected items
+                    const selectedItems = [];
+                    let orderTotal = 0;
+
+                    checkboxes.forEach(cb => {
+                        if (cb.checked) {
+                            selectedItems.push({
+                                name: cb.getAttribute('data-name'),
+                                price: parseFloat(cb.getAttribute('data-price'))
+                            });
+                            orderTotal += parseFloat(cb.getAttribute('data-price'));
+                        }
+                    });
+
+                    if (selectedItems.length === 0) {
+                        alert("Please select at least one item to purchase.");
+                        return;
+                    }
+
                     // Create a WhatsApp message with the order details
                     let orderMessage = "Hello Mandi Trendz! I would like to place an order for the following items:%0A%0A";
-                    cartDetails.forEach((item, index) => {
+                    selectedItems.forEach((item, index) => {
                         orderMessage += `${index + 1}. ${item.name} - KES ${item.price.toLocaleString()}%0A`;
                     });
-                    orderMessage += `%0A*Total: KES ${total.toLocaleString()}*%0A%0APlease let me know how to proceed with payment and delivery.`;
+                    orderMessage += `%0A*Total: KES ${orderTotal.toLocaleString()}*%0A%0APlease let me know how to proceed with payment and delivery.`;
 
                     window.open(`https://wa.me/254742439040?text=${orderMessage}`, "_blank");
                 });
