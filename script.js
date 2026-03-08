@@ -154,12 +154,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Dynamic Product Loading from Supabase
     async function fetchProducts() {
-        console.log("Fetching products from Supabase...");
         const grid = document.getElementById('products-grid');
         if (!grid) {
-            console.log("Products grid container not found");
-            return;
+            return; // Not on a page with products grid
         }
+
+        console.log("Fetching products from Supabase...");
 
         try {
             const { data: products, error } = await supabaseClient
