@@ -66,7 +66,10 @@ document.addEventListener("DOMContentLoaded", function () {
         cartIcon.addEventListener("click", function (e) {
             e.preventDefault(); // Prevent jump to top
             let cartPopup = document.getElementById("cart-popup");
-            if (!cartPopup) return;
+            if (!cartPopup) {
+                console.error("Cart popup container not found in HTML!");
+                return;
+            }
 
             let cartContent = "<h2>Cart Items</h2><ul style='list-style: none; padding: 0;'>";
             let total = 0;
