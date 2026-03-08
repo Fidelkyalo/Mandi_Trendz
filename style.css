@@ -712,6 +712,13 @@ nav {
     font-weight: 600;
 }
 
+.testimonial-card .location {
+    font-size: 14px;
+    color: #888;
+    font-style: italic;
+    margin-top: 5px;
+}
+
 @media (max-width: 768px) {
     .testimonials {
         padding: 60px 5%;
