@@ -1,3 +1,17 @@
+// Global Cart State
+let cartCount = 0;
+let cartDetails = [];
+
+// Global addToCart function for dynamic elements
+window.addToCart = function (name, price) {
+    cartCount++;
+    const cartCounter = document.getElementById("cart-counter");
+    if (cartCounter) cartCounter.textContent = cartCount;
+
+    cartDetails.push({ name: name, price: price });
+    alert(`Added ${name} to cart!`);
+};
+
 document.addEventListener("DOMContentLoaded", function () {
     // Make the logo and name clickable
     const logo = document.querySelector(".logo");
@@ -46,47 +60,52 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Add to cart functionality
-    let cartCount = 0;
-    const cartCounter = document.getElementById("cart-counter");
-    const cartDetails = [];
-
-    document.querySelectorAll(".cart-btn").forEach(button => {
-        button.addEventListener("click", function () {
-            let productName = this.closest(".product-item").querySelector(".product-name").textContent;
-            let productPrice = this.closest(".product-item").querySelector(".product-price").textContent;
-
-            cartCount++;
-            if (cartCounter) cartCounter.textContent = cartCount;
-
-            cartDetails.push({ name: productName, price: parseFloat(productPrice.replace(/[^0-9]/g, '')) });
-            alert("Item added to cart!");
-        });
-    });
-
     // Display cart items when clicked
     const cartIcon = document.getElementById("cart-icon");
     if (cartIcon) {
-        cartIcon.addEventListener("click", function () {
+        cartIcon.addEventListener("click", function (e) {
+            e.preventDefault(); // Prevent jump to top
             let cartPopup = document.getElementById("cart-popup");
             if (!cartPopup) return;
 
             let cartContent = "<h2>Cart Items</h2><ul>";
             let total = 0;
 
-            cartDetails.forEach(item => {
-                cartContent += `<li>${item.name} - KES ${item.price}</li>`;
-                total += item.price;
-            });
+            if (cartDetails.length === 0) {
+                cartContent += "<li>Your cart is empty</li>";
+            } else {
+                cartDetails.forEach(item => {
+                    cartContent += `<li>${item.name} - KES ${item.price.toLocaleString()}</li>`;
+                    total += item.price;
+                });
+            }
 
-            cartContent += `</ul><h3>Total: KES ${total}</h3><button id='place-order'>Place Order</button>`;
+            cartContent += `</ul><h3>Total: KES ${total.toLocaleString()}</h3><button id='place-order'>Place Order on WhatsApp</button>`;
+
+            // Add a close button
+            cartContent += `<button id='close-cart' style='margin-top: 10px; background: #333;'>Close Cart</button>`;
+
             cartPopup.innerHTML = cartContent;
             cartPopup.style.display = "block";
 
             const placeOrderBtn = document.getElementById("place-order");
             if (placeOrderBtn) {
                 placeOrderBtn.addEventListener("click", function () {
-                    window.location.href = "tel:*334*2*0742439040#";
+                    // Create a WhatsApp message with the order details
+                    let orderMessage = "Hello Mandi Trendz! I would like to place an order for the following items:%0A%0A";
+                    cartDetails.forEach((item, index) => {
+                        orderMessage += `${index + 1}. ${item.name} - KES ${item.price.toLocaleString()}%0A`;
+                    });
+                    orderMessage += `%0A*Total: KES ${total.toLocaleString()}*%0A%0APlease let me know how to proceed with payment and delivery.`;
+
+                    window.open(`https://wa.me/254742439040?text=${orderMessage}`, "_blank");
+                });
+            }
+
+            const closeCartBtn = document.getElementById("close-cart");
+            if (closeCartBtn) {
+                closeCartBtn.addEventListener("click", function () {
+                    cartPopup.style.display = "none";
                 });
             }
         });
@@ -233,10 +252,3 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
-
-// Global addToCart function for dynamic elements
-function addToCart(name, price) {
-    // Re-use logic or emit event
-    alert(`${name} added to cart!`);
-    // Note: The cart count logic in script.js needs to be globally accessible or updated here
-}
