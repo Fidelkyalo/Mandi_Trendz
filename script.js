@@ -129,13 +129,14 @@ document.addEventListener("DOMContentLoaded", function () {
             const grid = document.getElementById('products-grid');
             if (!grid) return;
 
-            const { data: products, error } = await supabase
+            const { data: products, error } = await supabaseClient
                 .from('products')
                 .select('*')
                 .eq('in_stock', true)
                 .order('created_at', { ascending: false });
 
             if (error) {
+                console.error("Supabase error:", error);
                 grid.innerHTML = '<p style="color: red;">Error loading products. Please try again later.</p>';
                 return;
             }
@@ -163,9 +164,10 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
             });
         }
+    }
 
-        fetchProducts();
-    });
+    fetchProducts();
+});
 
 // Global addToCart function for dynamic elements
 function addToCart(name, price) {
