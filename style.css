@@ -457,11 +457,6 @@ nav {
     transform: scale(1.08);
 }
 
-height: 250px;
-object-fit: cover;
-border-bottom: 1px solid #ddd;
-}
-
 .product-info {
     padding: 15px;
     background: #f8f8f8;
