@@ -434,7 +434,12 @@
                         .from('product-images')
                         .upload(fileName, imageFile);
 
-                    if (uploadError) throw uploadError;
+                    if (uploadError) {
+                        if (uploadError.message.includes("Bucket not found")) {
+                            throw new Error("STORAGE BUCKET MISSING: Please create a public bucket named 'product-images' in your Supabase Storage dashboard.");
+                        }
+                        throw uploadError;
+                    }
 
                     // Get Public URL
                     const { data: { publicUrl } } = supabaseClient
