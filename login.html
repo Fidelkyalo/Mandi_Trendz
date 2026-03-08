@@ -109,29 +109,55 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="config.js"></script>
     <script>
+        console.log("Login script initialized");
+
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
+            console.log("Form submitted...");
+
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const errorMsg = document.getElementById('errorMsg');
+            const submitBtn = e.target.querySelector('button');
 
-            const { data, error } = await supabase.auth.signInWithPassword({
-                email: email,
-                password: password,
-            });
+            submitBtn.textContent = 'Logging in...';
+            submitBtn.disabled = true;
+            errorMsg.style.display = 'none';
 
-            if (error) {
-                errorMsg.textContent = error.message;
+            try {
+                console.log("Attempting sign in for:", email);
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password,
+                });
+
+                if (error) {
+                    console.error("Login error:", error);
+                    errorMsg.textContent = error.message;
+                    if (error.message.includes("Email not confirmed")) {
+                        errorMsg.textContent = "Please confirm your email in Supabase settings or your inbox.";
+                    }
+                    errorMsg.style.display = 'block';
+                } else {
+                    console.log("Login successful!");
+                    window.location.href = 'admin.html';
+                }
+            } catch (err) {
+                console.error("Unexpected error:", err);
+                errorMsg.textContent = "An unexpected error occurred. Check browser console.";
                 errorMsg.style.display = 'block';
-            } else {
-                localStorage.setItem('supabase.auth.token', data.session.access_token);
-                window.location.href = 'admin.html';
+            } finally {
+                submitBtn.textContent = 'Log In';
+                submitBtn.disabled = false;
             }
         });
 
-        // Check if already logged in
+        // Check session
         supabase.auth.getSession().then(({ data: { session } }) => {
-            if (session) window.location.href = 'admin.html';
+            if (session) {
+                console.log("Active session found, redirecting...");
+                window.location.href = 'admin.html';
+            }
         });
     </script>
 </body>
