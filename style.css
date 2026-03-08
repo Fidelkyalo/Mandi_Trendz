@@ -112,11 +112,25 @@ nav {
     color: #fff;
 }
 
-.social-icons a.whatsapp:hover { background: #25D366; }
-.social-icons a.facebook:hover { background: #1877F2; }
-.social-icons a.instagram:hover { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-.social-icons a.tiktok:hover { background: #000; }
-.social-icons a.gmail:hover { background: #D44638; }
+.social-icons a.whatsapp:hover {
+    background: #25D366;
+}
+
+.social-icons a.facebook:hover {
+    background: #1877F2;
+}
+
+.social-icons a.instagram:hover {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+.social-icons a.tiktok:hover {
+    background: #000;
+}
+
+.social-icons a.gmail:hover {
+    background: #D44638;
+}
 
 .cart-search button {
     background: orange;
@@ -130,11 +144,48 @@ nav {
     box-shadow: 0 4px 10px rgba(255, 165, 0, 0.2);
 }
 
-.menu-toggle {
-    display: none;
-    font-size: 28px;
-    cursor: pointer;
-    color: #333;
+@media screen and (max-width: 992px) {
+    header {
+        padding: 10px 20px;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        flex-direction: column;
+        gap: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-links.active {
+        max-height: 400px;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links li a {
+        display: block;
+        padding: 15px;
+        border-bottom: 1px solid #f9f9f9;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-actions .social-icons {
+        display: none;
+        /* Hide on small screens to save space */
+    }
 }
 
 .hero {
@@ -196,6 +247,7 @@ nav {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
@@ -256,7 +308,7 @@ nav {
     padding: 20px;
 }
 
-.products h2{
+.products h2 {
     flood-color: #ccc;
 }
 
@@ -361,88 +413,93 @@ nav {
         width: 90%;
         height: auto;
     }
+
     .product-card img {
-        height: 200px; /* Slightly smaller images on mobile */
+        height: 200px;
+        /* Slightly smaller images on mobile */
     }
 }
 
 
 .contact-section {
-  padding: 40px;
-  background-color: #111;
-  color: white;
+    padding: 40px;
+    background-color: #111;
+    color: white;
 }
 
 .contact-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
 }
 
 .map-container {
-  flex: 1 1 45%;
-  min-height: 300px;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+    flex: 1 1 45%;
+    min-height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
 }
 
 .form-container {
-  flex: 1 1 45%;
-  background-color: #1a1a1a;
-  padding: 30px;
-  border-radius: 10px;
-  color: #fff;
+    flex: 1 1 45%;
+    background-color: #1a1a1a;
+    padding: 30px;
+    border-radius: 10px;
+    color: #fff;
 }
 
 .contact-details {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    padding: 0;
 }
 
 .contact-details li {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .form-container a {
-  color: orange;
-  text-decoration: none;
+    color: orange;
+    text-decoration: none;
 }
 
 .form-container a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .social-icons {
-  display: flex;
-  gap: 15px;
-  margin-top: 10px;
-  font-size: 24px;
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+    font-size: 24px;
 }
 
 .social-icons a {
-  color: whitesmoke;
-  transition: 0.3s;
+    color: whitesmoke;
+    transition: 0.3s;
 }
 
 .social-icons a:hover {
-  color: #ffb84d;
+    color: #ffb84d;
 }
 
 .closing-message {
-  margin-top: 20px;
-  font-weight: bold;
-  color: orange;
+    margin-top: 20px;
+    font-weight: bold;
+    color: orange;
 }
 
 
 .view-more-container {
-    text-align: center;  /* Center the button */
-    margin-top: 20px;    /* Space from products */
+    text-align: center;
+    /* Center the button */
+    margin-top: 20px;
+    /* Space from products */
 }
 
 .view-more-btn {
-    background-color: #ff6600; /* Orange color */
+    background-color: #ff6600;
+    /* Orange color */
     color: white;
     border: none;
     padding: 12px 24px;
@@ -454,7 +511,8 @@ nav {
 }
 
 .view-more-btn:hover {
-    background-color: #cc5200; /* Darker orange on hover */
+    background-color: #cc5200;
+    /* Darker orange on hover */
 }
 
 
@@ -584,5 +642,3 @@ footer {
 #backToTop:active {
     transform: scale(0.95);
 }
-
-
