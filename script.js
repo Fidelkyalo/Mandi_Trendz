@@ -238,7 +238,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Apply category filter if not "All Bags"
             if (selectedCategory && selectedCategory !== 'All Bags') {
-                query = query.eq('category', selectedCategory);
+                // Using .ilike ensures we find the category even if it's part of a comma-separated list
+                query = query.ilike('category', `%${selectedCategory}%`);
             }
 
             const { data: products, error } = await query;

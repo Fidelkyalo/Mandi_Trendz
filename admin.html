@@ -445,6 +445,44 @@
         }
 
         /* ── Responsive ── */
+        .category-grid-select {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #333;
+        }
+
+        .category-grid-select label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-bottom: 0 !important;
+        }
+
+        .category-grid-select input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #D4AF37;
+        }
+
+        .category-badge {
+            display: inline-block;
+            background: #222;
+            color: #D4AF37;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+            margin-right: 4px;
+            border: 1px solid #D4AF37;
+        }
+
         @media (max-width: 768px) {
             .admin-nav {
                 padding: 12px 4%;
@@ -639,21 +677,21 @@
                 </div>
 
                 <div class="input-group">
-                    <label>Category *</label>
-                    <select id="pCategory">
-                        <option value="Handbags">Handbags</option>
-                        <option value="Tote Bags">Tote Bags</option>
-                        <option value="Crossbody Bags">Crossbody Bags</option>
-                        <option value="Shoulder Bags">Shoulder Bags</option>
-                        <option value="Clutches">Clutches</option>
-                        <option value="Backpacks">Backpacks</option>
-                        <option value="Satchels">Satchels</option>
-                        <option value="Mini Bags">Mini Bags</option>
-                        <option value="Travel Bags">Travel Bags</option>
-                        <option value="Accessories">Accessories</option>
-                        <option value="Laptop bags">Laptop Bags</option>
-                        <option value="Unisex bags">Unisex Bags</option>
-                    </select>
+                    <label>Categories (Select at least one) *</label>
+                    <div id="category-checkboxes" class="category-grid-select">
+                        <label><input type="checkbox" name="pCategory" value="Handbags"> Handbags</label>
+                        <label><input type="checkbox" name="pCategory" value="Tote Bags"> Tote Bags</label>
+                        <label><input type="checkbox" name="pCategory" value="Crossbody Bags"> Crossbody Bags</label>
+                        <label><input type="checkbox" name="pCategory" value="Shoulder Bags"> Shoulder Bags</label>
+                        <label><input type="checkbox" name="pCategory" value="Clutches"> Clutches</label>
+                        <label><input type="checkbox" name="pCategory" value="Backpacks"> Backpacks</label>
+                        <label><input type="checkbox" name="pCategory" value="Satchels"> Satchels</label>
+                        <label><input type="checkbox" name="pCategory" value="Mini Bags"> Mini Bags</label>
+                        <label><input type="checkbox" name="pCategory" value="Travel Bags"> Travel Bags</label>
+                        <label><input type="checkbox" name="pCategory" value="Accessories"> Accessories</label>
+                        <label><input type="checkbox" name="pCategory" value="Laptop bags"> Laptop Bags</label>
+                        <label><input type="checkbox" name="pCategory" value="Unisex bags"> Unisex Bags</label>
+                    </div>
                 </div>
 
                 <div class="input-group">
@@ -731,14 +769,18 @@
 
                     const stockClass = p.in_stock ? 'in-stock' : 'out-of-stock';
                     const stockLabel = p.in_stock ? 'In Stock' : 'Out of Stock';
+                    // Ensure p.category is an array for consistent handling
+                    const productCategories = Array.isArray(p.category) ? p.category : (p.category ? p.category.split(',').map(c => c.trim()) : []);
+                    const categoryBadges = productCategories.map(c => `<span class="category-badge">${c}</span>`).join('');
                     const escapedP = JSON.stringify(p).replace(/"/g, '&quot;');
+
 
                     // ── Desktop row ──
                     tableBody.innerHTML += `
                         <tr>
                             <td><img src="${p.image_url || 'Images/Logo.jpg'}" class="thumb" onerror="this.src='Images/Logo.jpg'"></td>
                             <td>${p.name}</td>
-                            <td>${p.category}</td>
+                            <td style="max-width:200px;">${categoryBadges}</td>
                             <td>KES ${Number(p.price).toLocaleString()}</td>
                             <td>
                                 <div class="actions-td">
@@ -799,6 +841,10 @@
             document.getElementById('modalTitle').textContent = 'Add New Product';
             document.getElementById('productForm').reset();
             document.getElementById('productId').value = '';
+
+            // Clear checkboxes manually since reset() might not catch custom ones if they were checked via script
+            document.querySelectorAll('input[name="pCategory"]').forEach(cb => cb.checked = false);
+
             document.getElementById('productModal').style.display = 'flex';
         }
 
@@ -810,7 +856,15 @@
             document.getElementById('modalTitle').textContent = 'Edit Product';
             document.getElementById('productId').value = p.id;
             document.getElementById('pName').value = p.name;
-            document.getElementById('pCategory').value = p.category;
+
+            // Handle multiple categories
+            const checkboxes = document.querySelectorAll('input[name="pCategory"]');
+            const productCategories = (p.category || "").split(',').map(c => c.trim());
+
+            checkboxes.forEach(cb => {
+                cb.checked = productCategories.includes(cb.value);
+            });
+
             document.getElementById('pPrice').value = p.price;
             document.getElementById('pImageUrl').value = p.image_url || '';
             document.getElementById('pDescription').value = p.description || '';
@@ -857,9 +911,20 @@
                     imageUrl = publicUrl;
                 }
 
+                // Collect checked categories
+                const checkedCategories = Array.from(document.querySelectorAll('input[name="pCategory"]:checked'))
+                    .map(cb => cb.value);
+
+                if (checkedCategories.length === 0) {
+                    alert('Please select at least one category.');
+                    saveBtn.textContent = 'Save Product';
+                    saveBtn.disabled = false;
+                    return;
+                }
+
                 const pData = {
                     name: document.getElementById('pName').value.trim(),
-                    category: document.getElementById('pCategory').value,
+                    category: checkedCategories.join(', '), // Save as comma-separated string
                     price: parseFloat(document.getElementById('pPrice').value),
                     image_url: imageUrl,
                     description: document.getElementById('pDescription').value.trim()

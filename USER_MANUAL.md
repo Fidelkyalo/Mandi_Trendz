@@ -43,10 +43,11 @@ Your dashboard allows you to control exactly what appears on the store:
 
 #### **Adding a New Product**
 1. Click the **Add Product** button.
-2. Fill in the **Name**, **Category**, and **Price**.
-3. **Image**: Either upload an image file from your computer or paste an external Image URL.
-4. Add a brief **Description**.
-5. Click **Save Product**.
+2. Fill in the **Name** and **Price**.
+3. **Categories**: Select one or more categories by checking the boxes. This allows the product to appear in multiple sections of your store (e.g., both "Tote Bags" and "Travel" categories).
+4. **Image**: Either upload an image file from your computer or paste an external Image URL.
+5. Add a brief **Description**.
+6. Click **Save Product**.
 
 #### **Editing or Deleting**
 - **Edit**: Click the **Edit** icon on any product in the list to update its details or price.
