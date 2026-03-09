@@ -548,8 +548,8 @@ nav {
     }
 
     .hero-visual {
-        order: 1;
-        transform: scale(0.8);
+        display: none;
+        /* Hide image orb on mobile as requested */
     }
 
     .hero-brand {
@@ -572,25 +572,7 @@ nav {
         min-height: 100vh;
     }
 
-    .visual-inner {
-        width: 300px;
-        height: 300px;
-    }
-
-    .image-orb {
-        width: 220px;
-        height: 220px;
-    }
-
-    .orb-ring {
-        width: 280px;
-        height: 280px;
-    }
-
-    .orb-ring-large {
-        width: 340px;
-        height: 340px;
-    }
+    /* Visual elements hidden above */
 
     .hero-brand {
         font-size: 3.5rem;
