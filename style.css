@@ -428,16 +428,20 @@ nav {
 @media (max-width: 992px) {
     .hero {
         flex-direction: column-reverse;
-        padding: 120px 5% 50px;
+        padding: 50px 5% 50px;
+        /* Reduced top padding */
         text-align: center;
         justify-content: center;
-        gap: 50px;
+        gap: 20px;
+        min-height: calc(100vh - 80px);
+        /* Adjust for header if needed */
+        height: auto;
     }
 
     .hero::before {
         width: 150%;
-        height: 80%;
-        top: 30%;
+        height: 85%;
+        top: 25%;
         left: -25%;
         border-radius: 50% 50% 0 0;
         clip-path: none;
@@ -446,14 +450,61 @@ nav {
     .hero-text {
         max-width: 100%;
         padding-left: 0;
+        z-index: 5;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 15px;
     }
 
     .hero-title {
-        font-size: 5rem;
+        font-size: clamp(2.5rem, 12vw, 4.5rem);
+        /* Dynamically scales font size */
+    }
+
+    .hero-description {
+        font-size: clamp(1.5rem, 7vw, 2.5rem);
+        margin-bottom: 30px;
     }
 
     .hero-image {
-        width: 70%;
+        width: 60%;
+        /* Slightly smaller logo on mobile for better fit */
+        margin-bottom: 20px;
+    }
+
+    .hero-image img {
+        max-width: 250px;
+        /* Limit size on small screens */
+    }
+
+    .hero-image-container::before {
+        bottom: -20px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 40px 5% 40px;
+        gap: 15px;
+    }
+
+    .hero-title {
+        font-size: clamp(2rem, 15vw, 3.5rem);
+    }
+
+    .hero-description {
+        font-size: 1.8rem;
+    }
+
+    .hero-image {
+        width: 80%;
+    }
+
+    .hero-image img {
+        max-width: 200px;
     }
 }
 
