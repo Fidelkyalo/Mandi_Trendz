@@ -608,13 +608,12 @@
                         <th>Product Name</th>
                         <th>Category</th>
                         <th>Price (KES)</th>
-                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="productTableBody">
                     <tr class="loading-row">
-                        <td colspan="6">Loading products...</td>
+                        <td colspan="5">Loading products...</td>
                     </tr>
                 </tbody>
             </table>
@@ -724,7 +723,7 @@
             cardsEl.innerHTML = '';
 
             if (!products || products.length === 0) {
-                tableBody.innerHTML = '<tr class="loading-row"><td colspan="6">No products yet. Click "Add New Product" to get started.</td></tr>';
+                tableBody.innerHTML = '<tr class="loading-row"><td colspan="5">No products yet. Click "Add New Product" to get started.</td></tr>';
                 cardsEl.innerHTML = '<p style="color:#888;text-align:center;">No products yet.</p>';
             } else {
                 products.forEach(p => {
@@ -742,13 +741,11 @@
                             <td>${p.category}</td>
                             <td>KES ${Number(p.price).toLocaleString()}</td>
                             <td>
-                                <button class="stock-toggle ${stockClass}" onclick="toggleStock(${p.id}, ${p.in_stock})">
-                                    ${stockLabel}
-                                </button>
-                            </td>
-                            <td>
                                 <div class="actions-td">
                                     <i class='bx bx-edit edit-btn' title="Edit" onclick='editProduct(${escapedP})'></i>
+                                    <button class="stock-toggle ${stockClass}" onclick="toggleStock(${p.id}, ${p.in_stock})">
+                                        ${stockLabel}
+                                    </button>
                                     <i class='bx bx-trash delete-btn' title="Delete" onclick="deleteProduct(${p.id})"></i>
                                 </div>
                             </td>
@@ -762,10 +759,10 @@
                                 <div class="name">${p.name}</div>
                                 <div class="meta">${p.category} &nbsp;·&nbsp; KES ${Number(p.price).toLocaleString()}</div>
                                 <div class="card-actions">
+                                    <i class='bx bx-edit edit-btn' title="Edit" onclick='editProduct(${escapedP})'></i>
                                     <button class="stock-toggle ${stockClass}" onclick="toggleStock(${p.id}, ${p.in_stock})">
                                         ${stockLabel}
                                     </button>
-                                    <i class='bx bx-edit edit-btn' title="Edit" onclick='editProduct(${escapedP})'></i>
                                     <i class='bx bx-trash delete-btn' title="Delete" onclick="deleteProduct(${p.id})"></i>
                                 </div>
                             </div>

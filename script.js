@@ -219,6 +219,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+
     // Dynamic Product Loading from Supabase
     async function fetchProducts(selectedCategory = 'All Bags') {
         const grid = document.getElementById('products-grid');
@@ -233,7 +234,6 @@ document.addEventListener("DOMContentLoaded", function () {
             let query = supabaseClient
                 .from('products')
                 .select('*')
-                .eq('in_stock', true)
                 .order('created_at', { ascending: false });
 
             // Apply category filter if not "All Bags"
@@ -258,17 +258,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
             grid.innerHTML = '';
             products.forEach(product => {
+                const outOfStockLabel = product.in_stock ? '' : '<span class="out-of-stock-label" style="display:block; text-align:center; color:red; font-weight:bold; margin-top:5px;">Out of Stock</span>';
+                const cartButton = product.in_stock ? `<button class="cart-btn" onclick="addToCart('${product.name}', ${product.price})"><i class='bx bx-cart-add'></i></button>` : `<button class="cart-btn" disabled style="background:#ccc; cursor:not-allowed;"><i class='bx bx-cart-add'></i></button>`;
+
                 grid.innerHTML += `
                 <div class="product-card" data-category="${product.category}">
-                    <img src="${product.image_url}" alt="${product.name}">
+                    <img src="${product.image_url}" alt="${product.name}" ${!product.in_stock ? 'style="opacity: 0.6;"' : ''}>
                     <div class="product-info">
                         <p>${product.name}</p>
+                        ${outOfStockLabel}
                     </div>
                     <div class="product-footer">
                         <span class="price">KES ${product.price.toLocaleString()}</span>
-                        <button class="cart-btn" onclick="addToCart('${product.name}', ${product.price})">
-                            <i class='bx bx-cart-add'></i>
-                        </button>
+                        ${cartButton}
                     </div>
                 </div>
             `;
