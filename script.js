@@ -303,4 +303,124 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     }
+    // --- Testimonials & Star Rating Logic ---
+
+    const stars = document.querySelectorAll('#rating-stars i');
+    let selectedRating = 0;
+
+    if (stars.length > 0) {
+        stars.forEach(star => {
+            star.addEventListener('mouseover', function () {
+                const rating = this.getAttribute('data-rating');
+                highlightStars(rating);
+            });
+
+            star.addEventListener('mouseout', function () {
+                highlightStars(selectedRating);
+            });
+
+            star.addEventListener('click', function () {
+                selectedRating = this.getAttribute('data-rating');
+                highlightStars(selectedRating);
+            });
+        });
+    }
+
+    function highlightStars(rating) {
+        stars.forEach(star => {
+            const starRating = star.getAttribute('data-rating');
+            if (starRating <= rating) {
+                star.classList.add('active', 'bxs-star');
+                star.classList.remove('bx-star');
+            } else {
+                star.classList.remove('active', 'bxs-star');
+                star.classList.add('bx-star');
+            }
+        });
+    }
+
+    async function fetchTestimonials() {
+        const testimonialsList = document.getElementById('testimonials-list');
+        if (!testimonialsList) return;
+
+        try {
+            const { data, error } = await supabaseClient
+                .from('testimonials')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                console.error("Error fetching testimonials:", error);
+                testimonialsList.innerHTML = '<p style="color: #666;">Be the first to leave a review!</p>';
+                return;
+            }
+
+            if (data && data.length > 0) {
+                testimonialsList.innerHTML = '';
+                data.forEach(t => {
+                    let starsHtml = '';
+                    for (let i = 1; i <= 5; i++) {
+                        starsHtml += i <= t.rating ? "<i class='bx bxs-star'></i>" : "<i class='bx bx-star'></i>";
+                    }
+
+                    testimonialsList.innerHTML += `
+                        <div class="testimonial-card-premium">
+                            <div class="card-stars">${starsHtml}</div>
+                            <p class="card-text">"${t.comment}"</p>
+                            <div class="card-author">- ${t.name}</div>
+                        </div>
+                    `;
+                });
+            } else {
+                testimonialsList.innerHTML = '<p style="color: #666;">No reviews yet. Share your experience!</p>';
+            }
+        } catch (err) {
+            console.error("Unexpected error fetching testimonials:", err);
+        }
+    }
+
+    const submitBtn = document.getElementById('submit-testimonial');
+    if (submitBtn) {
+        submitBtn.addEventListener('click', async function () {
+            const nameInput = document.getElementById('client-name');
+            const commentInput = document.getElementById('client-comment');
+
+            const name = nameInput.value.trim();
+            const comment = commentInput.value.trim();
+
+            if (!name || !comment || selectedRating === 0) {
+                alert("Please provide your name, a comment, and a rating!");
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Posting... <i class="bx bx-loader-alt bx-spin"></i>';
+
+            try {
+                const { error } = await supabaseClient
+                    .from('testimonials')
+                    .insert([{ name, comment, rating: parseInt(selectedRating) }]);
+
+                if (error) {
+                    console.error("Error submitting testimonial:", error);
+                    alert("Failed to post comment. Make sure the 'testimonials' table exists in Supabase!");
+                } else {
+                    alert("Thank you for your feedback!");
+                    nameInput.value = '';
+                    commentInput.value = '';
+                    selectedRating = 0;
+                    highlightStars(0);
+                    fetchTestimonials();
+                }
+            } catch (err) {
+                console.error("Unexpected error:", err);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Post Comment <i class="bx bx-send"></i>';
+            }
+        });
+    }
+
+    // Load testimonials on page load
+    fetchTestimonials();
 });
