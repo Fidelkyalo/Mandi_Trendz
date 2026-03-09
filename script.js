@@ -260,12 +260,14 @@ document.addEventListener("DOMContentLoaded", function () {
             products.forEach(product => {
                 const outOfStockLabel = product.in_stock ? '' : '<span class="out-of-stock-label" style="display:block; text-align:center; color:red; font-weight:bold; margin-top:5px;">Out of Stock</span>';
                 const cartButton = product.in_stock ? `<button class="cart-btn" onclick="addToCart('${product.name}', ${product.price})"><i class='bx bx-cart-add'></i></button>` : `<button class="cart-btn" disabled style="background:#ccc; cursor:not-allowed;"><i class='bx bx-cart-add'></i></button>`;
+                const description = product.description ? `<p class="product-description">${product.description}</p>` : '';
 
                 grid.innerHTML += `
                 <div class="product-card" data-category="${product.category}">
                     <img src="${product.image_url}" alt="${product.name}" ${!product.in_stock ? 'style="opacity: 0.6;"' : ''}>
                     <div class="product-info">
-                        <p>${product.name}</p>
+                        <p class="product-name">${product.name}</p>
+                        ${description}
                         ${outOfStockLabel}
                     </div>
                     <div class="product-footer">
