@@ -1711,6 +1711,12 @@ footer {
     margin-bottom: 60px;
 }
 
+.contact-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
 .contact-card {
     background: #111;
     padding: 40px;
