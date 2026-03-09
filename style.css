@@ -428,83 +428,95 @@ nav {
 @media (max-width: 992px) {
     .hero {
         flex-direction: column-reverse;
-        padding: 50px 5% 50px;
-        /* Reduced top padding */
+        padding: 80px 5% 40px;
         text-align: center;
-        justify-content: center;
+        justify-content: flex-end;
+        /* Push content towards bottom/center */
         gap: 20px;
-        min-height: calc(100vh - 80px);
-        /* Adjust for header if needed */
-        height: auto;
+        height: 100vh;
+        min-height: 600px;
+        display: flex;
     }
 
     .hero::before {
-        width: 150%;
-        height: 85%;
-        top: 25%;
-        left: -25%;
+        width: 160%;
+        height: 75%;
+        top: auto;
+        bottom: 0;
+        left: -30%;
         border-radius: 50% 50% 0 0;
         clip-path: none;
+        z-index: 1;
     }
 
     .hero-text {
         max-width: 100%;
         padding-left: 0;
         z-index: 5;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: -20px;
     }
 
     .hero-subtitle {
-        font-size: 1rem;
-        margin-bottom: 15px;
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+        color: #fff;
     }
 
     .hero-title {
-        font-size: clamp(2.5rem, 12vw, 4.5rem);
-        /* Dynamically scales font size */
+        font-size: clamp(2.2rem, 15vw, 4rem);
+        line-height: 0.9;
+    }
+
+    .hero-title.outline {
+        margin-top: 5px;
     }
 
     .hero-description {
-        font-size: clamp(1.5rem, 7vw, 2.5rem);
-        margin-bottom: 30px;
+        font-size: clamp(1.4rem, 8vw, 2.2rem);
+        margin-top: 15px;
+        margin-bottom: 25px;
+        color: #0c0c0c;
     }
 
     .hero-image {
-        width: 60%;
-        /* Slightly smaller logo on mobile for better fit */
-        margin-bottom: 20px;
+        width: 100%;
+        height: 35vh;
+        margin-bottom: 0;
+        flex-shrink: 0;
     }
 
     .hero-image img {
+        max-height: 100%;
+        width: auto;
         max-width: 250px;
-        /* Limit size on small screens */
     }
 
     .hero-image-container::before {
-        bottom: -20px;
-        height: 40px;
+        bottom: -15px;
+        height: 30px;
+        width: 60%;
     }
 }
 
 @media (max-width: 480px) {
     .hero {
-        padding: 40px 5% 40px;
-        gap: 15px;
+        padding: 70px 5% 30px;
+    }
+
+    .hero-subtitle {
+        font-size: 0.8rem;
     }
 
     .hero-title {
-        font-size: clamp(2rem, 15vw, 3.5rem);
+        font-size: clamp(2rem, 18vw, 3.5rem);
     }
 
     .hero-description {
-        font-size: 1.8rem;
-    }
-
-    .hero-image {
-        width: 80%;
-    }
-
-    .hero-image img {
-        max-width: 200px;
+        font-size: clamp(1.2rem, 10vw, 2rem);
     }
 }
 
