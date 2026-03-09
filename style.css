@@ -7,7 +7,8 @@
 
 body {
     padding-top: 80px;
-    background-color: white;
+    background-color: #050505;
+    color: #fff;
 }
 
 header {
@@ -1528,6 +1529,8 @@ footer {
     font-size: 3.5rem;
     font-weight: 900;
     letter-spacing: -1px;
+    color: #fff;
+    /* Ensure 'OUR' is white */
 }
 
 .about-content {
@@ -1600,6 +1603,8 @@ footer {
 .section-header h2 {
     font-size: 3rem;
     font-weight: 900;
+    color: #fff;
+    /* Ensure 'OUR' or other words are white */
 }
 
 .testimonial-form-container {

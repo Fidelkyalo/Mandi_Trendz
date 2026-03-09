@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mandi Trendz</title>
+    <title>Mandi Trendz - Testimonials</title>
     <link rel="icon" href="Images/Logo.jpg" type="image/jpeg">
     <!-- Boxicons CDN -->
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
@@ -15,9 +15,13 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
         rel="stylesheet">
+    <!-- Supabase SDK and Config -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
 </head>
 
-<body>
+<body style="background: #050505;">
     <header>
         <nav>
             <a href="index.html" class="logo">
@@ -27,8 +31,8 @@
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About Us</a></li>
-                <li><a href="#featured-products">Products</a></li>
-                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="index.html#featured-products">Products</a></li>
+                <li><a href="testimonials.html" class="active">Testimonials</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
             </ul>
 
@@ -60,94 +64,34 @@
         </nav>
     </header>
 
-    <!--Home Section-->
-
-    <section id="home" class="hero-redesign">
-        <div class="hero-background">
-            <div class="glow glow-1"></div>
-            <div class="glow glow-2"></div>
-        </div>
-
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="text-reveal">
-                    <p class="hero-tagline">Look Stylish, Be stylish</p>
-                </div>
-                <div class="title-reveal">
-                    <h1 class="hero-brand">
-                        <span class="brand-mandi">MANDI</span>
-                        <span class="brand-trendz">TRENDZ</span>
-                    </h1>
-                </div>
-                <div class="desc-reveal">
-                    <p class="hero-subtext">ladies bags & personalized gifts</p>
-                </div>
-                <div class="btn-reveal">
-                    <a href="#featured-products" class="cta-button">
-                        <span>EXPLORE COLLECTION</span>
-                        <i class='bx bx-right-arrow-alt'></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="hero-visual">
-                <div class="visual-inner">
-                    <div class="image-orb">
-                        <img src="Images/Logo.jpg" alt="Mandi Trendz Logo">
-                    </div>
-                    <div class="orb-ring"></div>
-                    <div class="orb-ring-large"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Products Section -->
-    <section id="featured-products" class="featured-products">
-        <div class="big-product-card">
-            <div class="products-header">
-                <h2>OUR <span class="gold-text">COLLECTIONS</span></h2>
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section" style="min-height: 80vh;">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>CLIENT <span class="gold-text">TESTIMONIALS</span></h2>
                 <div class="gold-divider"></div>
             </div>
 
-            <div class="categories-container">
-                <div class="categories-grid">
-                    <div class="category-item active">All Bags</div>
-                    <div class="category-item">Handbags</div>
-                    <div class="category-item">Tote Bags</div>
-                    <div class="category-item">Crossbody Bags</div>
-                    <div class="category-item">Shoulder Bags</div>
-                    <div class="category-item">Clutches</div>
-                    <div class="category-item">Backpacks</div>
-                    <div class="category-item">Satchels</div>
-                    <div class="category-item">Mini Bags</div>
-                    <div class="category-item">Travel Bags</div>
-                    <div class="category-item">Accessories</div>
-                    <div class="category-item">Laptop bags</div>
-                    <div class="category-item">Unisex bags</div>
+            <div class="testimonial-form-container">
+                <h3>Leave a Feedback</h3>
+                <div class="star-rating" id="rating-stars">
+                    <i class='bx bx-star' data-rating="1"></i>
+                    <i class='bx bx-star' data-rating="2"></i>
+                    <i class='bx bx-star' data-rating="3"></i>
+                    <i class='bx bx-star' data-rating="4"></i>
+                    <i class='bx bx-star' data-rating="5"></i>
                 </div>
+                <input type="text" id="client-name" placeholder="Your Name" required>
+                <textarea id="client-comment" placeholder="What do you think about our service?" required></textarea>
+                <button id="submit-testimonial" class="cta-button">Post Comment <i class='bx bx-send'></i></button>
             </div>
 
-            <div class="products-title">
-                <h2 style="color: white; margin-bottom: 20px; font-style: italic;">TO PURCHASE <span
-                        class="gold-text">ADD TO CART THEN VIEW/CLICK ON CART</span></h2>
-            </div>
-
-            <div class="products-container" id="products-grid">
-                <!-- Products will load dynamically from Supabase -->
-                <p style="color: #888; text-align: center; width: 100%;">Loading latest collection...</p>
-            </div>
-
-            <div style="margin-top: 40px;">
-                <h2 style="font-size: 16px; color: #bbb; text-transform: uppercase;">OUR POPULAR PRODUCTS ARE IN
-                    DIFFERENT COLORS AND ARE POSTED ON OUR VARIOUS SOCIAL MEDIA PLATFORMS ON A DAILY BASIS. YOU CAN ALSO
-                    VISIT OUR SHOP FOR MORE OF THE SAME.</h2>
-                <h2 style="font-size: 16px; color: #D4AF37; margin-top: 10px;">Shop M 56, Taveta Shopping Mall, Taveta
-                    Rd, Nairobi, Kenya</h2>
+            <div class="testimonials-grid" id="testimonials-list">
+                <!-- Testimonials will be loaded here from Supabase -->
+                <p class="loading-text">Loading reviews...</p>
             </div>
         </div>
     </section>
-
 
     <!-- Cart Popup Container -->
     <div id="cart-popup" class="cart-popup"></div>
@@ -185,7 +129,7 @@
             <div class="footer-section">
                 <h3>Support</h3>
                 <ul>
-                    <li><a href="#featured-products">Our Products</a></li>
+                    <li><a href="index.html#featured-products">Our Products</a></li>
                     <li><a href="contact.html">Help Center</a></li>
                     <li><a href="about.html">Our Story</a></li>
                 </ul>
@@ -193,9 +137,9 @@
             <div class="footer-section">
                 <h3>Quick Shop</h3>
                 <ul>
-                    <li><a href="#featured-products">Handbags</a></li>
-                    <li><a href="#featured-products">Tote Bags</a></li>
-                    <li><a href="#featured-products">Accessories</a></li>
+                    <li><a href="index.html#featured-products">Handbags</a></li>
+                    <li><a href="index.html#featured-products">Tote Bags</a></li>
+                    <li><a href="index.html#featured-products">Accessories</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -217,9 +161,6 @@
 
         <div class="footer-bottom">
             <p>© 2025 Mandi Trendz || All Rights Reserved.</p>
-            <a href="login.html"
-                style="color: #333; font-size: 10px; text-decoration: none; margin-top: 5px; display: block;">Admin
-                Access</a>
         </div>
     </footer>
 
@@ -227,10 +168,6 @@
 
     <button id="backToTop" title="Go to top">↑</button>
 
-    <!-- Supabase SDK and Config -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="config.js"></script>
-    <script src="script.js"></script>
 </body>
 
 </html>

@@ -11,13 +11,17 @@
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+        rel="stylesheet">
     <!-- Supabase SDK and Config -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="config.js"></script>
     <script src="script.js"></script>
 </head>
 
-<body>
+<body style="background: #050505;">
     <header>
         <nav>
             <a href="index.html" class="logo">
@@ -27,8 +31,9 @@
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About Us</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="index.html#featured-products">Products</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="contact.html" class="active">Contact Us</a></li>
             </ul>
 
             <div class="nav-actions">
@@ -58,45 +63,41 @@
             </div>
         </nav>
     </header>
-    <marquee>
-        <h2>...CONTACT US...</h2>
-    </marquee>
+
     <section id="contact" class="contact-section">
-        <div class="contact-container">
-            <!-- Contact Info Section -->
-            <div class="form-container">
-                <h2 class="gold-text">Contact Us</h2>
-                <p>We’d love to hear from you. Reach out through any of the options below:</p>
-
-                <ul class="contact-details">
-                    <li><strong>📍 Address:</strong> Shop M 56, Taveta Shopping Mall, Taveta Rd, Nairobi, Kenya</li>
-                    <li><strong>📞 Phone:</strong> <a href="tel:+254742439040" style="color: #D4AF37;">+254
-                            742439040</a></li>
-                    <li><strong>✉️ Email:</strong> <a href="mailto:emmahmumoh@gmail.com"
-                            style="color: #D4AF37;">emmahmumoh@gmail.com</a></li>
-                </ul>
-
-                <div class="social-icons">
-                    <a href="https://wa.me/254742439040" target="_blank"><i class='bx bxl-whatsapp'></i></a>
-                    <a href="https://www.facebook.com/share/18xL4965JN/" target="_blank"><i
-                            class='bx bxl-facebook'></i></a>
-                    <a href="https://www.instagram.com/mandi.trendz" target="_blank"><i
-                            class='bx bxl-instagram'></i></a>
-                    <a href="https://www.tiktok.com/@mandi.trendz" target="_blank"><i class='bx bxl-tiktok'></i></a>
-                </div>
-
-                <p class="closing-message">Let’s talk! We’re always happy to help you find your perfect style.</p>
-                <p class="closing-message">Payments are done via M-Pesa; Pochi La Biashara at; 0742439040.</p>
+        <div class="section-container">
+            <div class="section-header">
+                <h2>GET IN <span class="gold-text">TOUCH</span></h2>
+                <div class="gold-divider"></div>
             </div>
-        </div>
 
-        <!-- Spaced Map Section -->
-        <div class="map-container-full">
-            <div class="map-card">
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <i class='bx bx-map gold-icon'></i>
+                    <h4>Visit Our Shop</h4>
+                    <p>Shop M 56, Taveta Shopping Mall, Nairobi</p>
+                </div>
+                <div class="contact-card">
+                    <i class='bx bx-phone gold-icon'></i>
+                    <h4>Call Us</h4>
+                    <p>+254 742439040</p>
+                </div>
+                <div class="contact-card">
+                    <i class='bx bx-envelope gold-icon'></i>
+                    <h4>Email Us</h4>
+                    <p>emmahmumoh@gmail.com</p>
+                </div>
+            </div>
+
+            <div class="map-container">
                 <iframe
                     src="https://maps.google.com/maps?q=Taveta%20Shopping%20Mall%20Nairobi&t=&z=18&ie=UTF8&iwloc=B&output=embed"
-                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                    loading="lazy"></iframe>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px; color: #aaa;">
+                <p>Payments are done via M-Pesa; Pochi La Biashara at; 0742439040.</p>
             </div>
         </div>
     </section>
@@ -137,7 +138,7 @@
             <div class="footer-section">
                 <h3>Support</h3>
                 <ul>
-                    <li><a href="products.html">Our Products</a></li>
+                    <li><a href="index.html#featured-products">Our Products</a></li>
                     <li><a href="contact.html">Help Center</a></li>
                     <li><a href="about.html">Our Story</a></li>
                 </ul>
@@ -145,9 +146,9 @@
             <div class="footer-section">
                 <h3>Quick Shop</h3>
                 <ul>
-                    <li><a href="products.html">Handbags</a></li>
-                    <li><a href="products.html">Tote Bags</a></li>
-                    <li><a href="products.html">Accessories</a></li>
+                    <li><a href="index.html#featured-products">Handbags</a></li>
+                    <li><a href="index.html#featured-products">Tote Bags</a></li>
+                    <li><a href="index.html#featured-products">Accessories</a></li>
                 </ul>
             </div>
             <div class="footer-section">
