@@ -271,58 +271,147 @@ nav {
 }
 
 .hero {
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 50px 10%;
+    padding: 100px 8%;
+    background-color: #0c0c0c;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Background Blob Effect */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -15%;
+    width: 70%;
+    height: 120%;
+    background-color: #D4AF37;
+    /* Metallic Gold */
+    border-radius: 0 40% 60% 0;
+    z-index: 0;
+    clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+    box-shadow: 20px 0 50px rgba(0, 0, 0, 0.5);
 }
 
 .hero-text {
-    max-width: 50%;
+    max-width: 55%;
+    z-index: 2;
+    position: relative;
+    padding-left: 20px;
 }
 
-.hero-text .tagline {
-    color: orange;
-    font-weight: bold;
-    margin-bottom: 10px;
+.hero-subtitle {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
-.hero-text h1 {
-    font-size: 50px;
-    line-height: 1.2;
+.hero-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(4rem, 10vw, 8rem);
+    line-height: 0.85;
+    font-weight: 900;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: -2px;
 }
 
-.hero-text .highlight {
-    color: orange;
+.hero-title.main {
+    color: #0c0c0c;
 }
 
-.hero-text p {
-    margin: 20px 0;
-    font-size: 16px;
-    color: black;
+.hero-title.outline {
+    color: transparent;
+    -webkit-text-stroke: 2px #fff;
 }
 
-
-
-.buy-btn {
-    padding: 10px 20px;
-    background-color: orange;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
-    transition: background 0.3s ease;
+.hero-description {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: #0c0c0c;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    font-weight: 700;
 }
 
-.buy-btn:hover {
-    background-color: black;
+.shop-now-btn {
+    display: inline-block;
+    padding: 12px 35px;
+    background: #0c0c0c;
+    color: #D4AF37;
+    text-decoration: none;
+    font-weight: 800;
+    border-radius: 50px;
+    border: 2px solid #0c0c0c;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.shop-now-btn:hover {
+    transform: scale(1.1);
+    background: transparent;
+    color: #0c0c0c;
+}
+
+.hero-image {
+    width: 40%;
+    z-index: 2;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-image-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Pedestal */
+.hero-image-container::before {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    width: 80%;
+    height: 80px;
+    background: radial-gradient(circle, #333, #0c0c0c);
+    border: 3px solid #D4AF37;
+    border-radius: 50%;
+    z-index: 1;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8);
 }
 
 .hero-image img {
-    width: 450px;
-    border-radius: 50%;
-    animation: rotate 8s linear infinite;
+    width: 100%;
+    max-width: 450px;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.5));
+    animation: floating 3s ease-in-out infinite, rotate 20s linear infinite;
+}
+
+@keyframes floating {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
 }
 
 @keyframes rotate {
@@ -334,6 +423,39 @@ nav {
         transform: rotate(360deg);
     }
 }
+
+@media (max-width: 992px) {
+    .hero {
+        flex-direction: column-reverse;
+        padding: 120px 5% 50px;
+        text-align: center;
+        justify-content: center;
+        gap: 50px;
+    }
+
+    .hero::before {
+        width: 150%;
+        height: 80%;
+        top: 30%;
+        left: -25%;
+        border-radius: 50% 50% 0 0;
+        clip-path: none;
+    }
+
+    .hero-text {
+        max-width: 100%;
+        padding-left: 0;
+    }
+
+    .hero-title {
+        font-size: 5rem;
+    }
+
+    .hero-image {
+        width: 70%;
+    }
+}
+
 
 /* About Section Improvements */
 .about-section {
